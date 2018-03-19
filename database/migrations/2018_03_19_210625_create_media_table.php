@@ -17,10 +17,13 @@ class CreateMediaTable extends Migration
             $table->increments('idmedia');
             $table->integer('type');
             $table->string('url');
-            $table->integer('vehicle_idvehicle')->unsigned();
-            $table->index('vehicle_idvehicle');
 
-            // TODO: Crear relación con vehicle
+            $table_name = 'vehicle_idvehicle';
+            $table->integer($table_name)->unsigned();
+            $table->index($table_name);
+            $table->foreign($table_name)
+                ->references('idvehicle')
+                ->on('vehicle');
 
             $table->timestamps();
         });
